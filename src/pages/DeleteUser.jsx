@@ -6,9 +6,11 @@ import useTheme from "@context/ThemeContext";
 import { CircularProgress } from "@chakra-ui/react";
 import { Button, message, Popconfirm, FloatButton } from "antd";
 import { DeleteOutlined, QuestionCircleOutlined } from "@ant-design/icons";
+import { deleteFile } from "@/firebase/firebase";
 
 const DeleteUser = ({ userID: id, text, float }) => {
   const [loading, setLoading] = useState(false);
+  const [userImage, setUserImage] = useState(null)
   const navigate = useNavigate();
   const location = useLocation();
   const { themeMode } = useTheme();
@@ -19,6 +21,22 @@ const DeleteUser = ({ userID: id, text, float }) => {
   useEffect(() => {
     if (!token) navigate("/login");
   }, []);
+
+  useEffect(() => {
+    try {
+      const fetchUserImage = async () => {
+        const res = await axios.get(
+          `${import.meta.env.VITE_REACT_APP_URL}/users/${id}`
+        );
+       setUserImage(res.data.profileImage)
+      }
+    
+
+      fetchUserImage()
+    } catch(err) {
+      console.log(err)
+    }
+  })
   const deleteUser = async () => {
     try {
       const res = await axios.delete(
@@ -29,6 +47,7 @@ const DeleteUser = ({ userID: id, text, float }) => {
         }
       );
       if (res.status === 200) {
+        await deleteFile(userImage)
         success();
         if (location.pathname === "/dashboard/users") window.location.reload();
         setTimeout(() => {

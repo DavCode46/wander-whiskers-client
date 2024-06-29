@@ -38,7 +38,7 @@ const PostDrawer = ({ isEditing, postId, homeButton }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [specie, setSpecie] = useState("");
-  const [oldImageUrl, setOldImageUrl] = useState(null); 
+  const [oldImageUrl, setOldImageUrl] = useState(null);
 
   const [image, setImage] = useState([]);
   const [condition, setCondition] = useState("");
@@ -68,7 +68,7 @@ const PostDrawer = ({ isEditing, postId, homeButton }) => {
         setImage(info.file);
       }
       if (status === "done") {
-        message.success(`${info.file.name} Imagen Subida satisfactoriamente.`);
+        // message.success(`${info.file.name} Imagen Subida satisfactoriamente.`);
         setImage(info.file);
       } else if (status === "error") {
         message.error(`${info.file.name} Error al subir la imagen.`);
@@ -111,8 +111,8 @@ const PostDrawer = ({ isEditing, postId, homeButton }) => {
         const imageUrl = await uploadFile("posts", image.originFileObj);
         post.set("image", imageUrl);
       } catch (err) {
-        setError('Error al subir la imagen')
-        errorMessage()
+        setError("Error al subir la imagen");
+        errorMessage();
       }
     }
 
@@ -152,7 +152,7 @@ const PostDrawer = ({ isEditing, postId, homeButton }) => {
           setSpecie(res.data.specie);
           setCondition(res.data.condition);
           setSelectedProvince(res.data.location);
-          setOldImageUrl(res.data.image)
+          setOldImageUrl(res.data.image);
         } catch (err) {
           setError(err);
         }
@@ -171,14 +171,14 @@ const PostDrawer = ({ isEditing, postId, homeButton }) => {
     post.set("condition", condition);
     // Verificar si hay una nueva imagen seleccionada
     if (image) {
+      if (oldImageUrl) {
+        await deleteFile(oldImageUrl);
+      }
       try {
-        // if (oldImageUrl) {
-        //   await deleteFile(oldImageUrl); 
-        // }
         const imageUrl = await uploadFile("posts", image.originFileObj);
         post.set("image", imageUrl);
       } catch (err) {
-        setError('Error al subir la imagen');
+        setError("Error al subir la imagen");
         errorMessage();
       }
     }

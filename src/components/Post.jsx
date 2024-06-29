@@ -30,6 +30,7 @@ const Post = ({
   specie,
   condition,
 }) => {
+  console.log('image', image)
   const substrContent =
     content.length > 70 ? content.substr(0, 70) + "..." : content;
   const substrTitle = title.length > 40 ? title.substr(0, 40) + "..." : title;

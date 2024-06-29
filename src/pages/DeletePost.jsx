@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import {  useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { UserContext } from "@context/UserContext";
 import axios from "axios";
 import { Button, message, Popconfirm } from "antd";
 import { DeleteOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import useTheme from "@context/ThemeContext";
 import { CircularProgress } from "@chakra-ui/react";
+import { deleteFile } from "@/firebase/firebase";
 
 const DeletePost = ({ postID: id }) => {
   const [loading, setLoading] = useState(false);
+  const [post, setPost] = useState(null);
   const [error, setError] = useState("Error al eliminar la publicación");
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,11 +19,36 @@ const DeletePost = ({ postID: id }) => {
 
   const { currentUser } = useContext(UserContext);
   const token = currentUser?.token;
+
   useEffect(() => {
     if (!token) navigate("/login");
   }, []);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_REACT_APP_URL}/posts/${id}`
+        );
+        setPost(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchPost();
+  }, [id]);
+
   const deletePost = async () => {
+    if (!post) {
+      console.log("El post aún no se ha cargado completamente.");
+      return;
+    }
+
     try {
+      if (post.image) {
+        await deleteFile(post.image);
+      }
+      
       const res = await axios.delete(
         `${import.meta.env.VITE_REACT_APP_URL}/posts/${id}`,
         {
@@ -29,12 +56,12 @@ const DeletePost = ({ postID: id }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+
       if (res.status === 200) {
         if (
           location.pathname === `/profile/${currentUser?.id}` ||
           location.pathname === "/dashboard"
         ) {
-         
           success();
           window.location.reload();
         } else {
@@ -44,9 +71,9 @@ const DeletePost = ({ postID: id }) => {
       }
       setLoading(false);
     } catch (err) {
-      setError(err.response.data.message);
+      console.log(err);
+      setError(err.response?.data?.message || "Error al eliminar la publicación");
       errorMessage();
-      // console.log(err);
     }
   };
 
@@ -64,13 +91,13 @@ const DeletePost = ({ postID: id }) => {
     });
   };
 
-  if (loading)
+  if (loading) {
     return (
       <CircularProgress
         isIndeterminate
         size="100px"
         thickness="7px"
-        aria-label="cargando"
+        aria-label="Cargando"
         style={{
           position: "absolute",
           top: "50%",
@@ -79,6 +106,8 @@ const DeletePost = ({ postID: id }) => {
         }}
       />
     );
+  }
+
   return (
     <>
       {contextHolder}

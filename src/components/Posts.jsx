@@ -34,7 +34,6 @@ const Posts = () => {
         const res = await axios.get(
           `${import.meta.env.VITE_REACT_APP_URL}/posts`
         );
-
         setPosts(res?.data);
       } catch (err) {
         // console.log(err);
