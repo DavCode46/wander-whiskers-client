@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sora: "Sora", sans-serif;
+  --font-code: "Source Code Pro", monospace;
+  --font-grotesk: "Space Grotesk", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --bg-darkMode: '#001529';
+  /* color-scheme: dark; */
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .card-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+    align-items: center;
+  }
+
+  .instagram-bg {
+    background: radial-gradient(
+      circle at 30% 107%,
+      #fdf497 0%,
+      #fdf497 5%,
+      #fd5949 45%,
+      #d6249f 60%,
+      #285aeb 90%
+    );
+  }
+
+  .card__selected {
+    transform: scale(1.2);
+    transform: translateY(-10px);
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-family: var(--font-sora);
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background: #fff;
+  }
+
+  .dark.table {
+    background-color: #1F2E35;
+  }
+  
+  .table .ant-table-thead > tr > th {
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .dark .ant-table-thead > tr > th {
+    background-color: #1F2E35;
+    color: #ccc;
+  }
+  
+  .dark.table .ant-table-pagination {
+    background-color: #1F2E35;
+  }
+
+  .dark.table .ant-table-cell {
+    background: #1F2E35;
+    color: #ccc;
+  }
+
+  .dark.table .anticon{
+    color: #ccc;
+  }
+  
+  .dark .ant-table-filter-dropdown-tree span,
+  .dark .ant-input-affix-wrapper .ant-input-prefix svg,
+  .dark .ant-table-filter-trigger svg,
+  .dark .ant-table-column-sorter {
+    color: #ccc;
+  }
+  
+.dark .ant-table-column-sorter {
+  background-color: transparent;
+}
+.dark .ant-table-column-sorter-inner {
+  background-color: transparent;
+}
+
+.dark .ant-table-cell-row-hover {
+  background-color: #2A3B44 !important;
+}
+
+.dark .ant-table-column-has-sorters:hover,
+.dark .ant-table-column-has-sorters:focus {
+  background: #2A3B44!important;
+}
+.dark .ant-table-column-sorter-down,
+.dark .ant-table-column-sorter-up{
+  color: #ccc;
+}
+.dark .ant-popover-inner {
+  background-color: #0e182a;
+}
+
+.dark .ant-select-selection-placeholder {
+  color: #cacaca;
+}
+
+
+.dark .ant-cascader-checkbox-checked .ant-cascader-checkbox-inner {
+  background-color: #1890ff !important; /* Color azul de Ant Design */
+  border-color: #1890ff !important;    /* Color azul de Ant Design */
+}
+
+/* .dark .ant-select-dropdown {
+  background-color: #0e182a;
+  border: 1px solid #ccc;
+} */
+.dark .ant-upload-list-item-name,
+.dark .ant-upload-list-item-actions,
+.ant-upload-list-item-actions .anticon-delete,
+.ant-upload-list-item-actions .anticon-delete svg {
+  color: #ccc;
+}
+
+.dark.ant-pagination-item {
+  color: #ccc;
+}
+
+.dark .ant-select-selector,
+.dark .ant-select-dropdown,
+.dark .ant-pagination-item-link,
+.dark.ant-pagination{
+  color: #ccc;
+}
+
+  .clip-path {
+    clip-path: polygon(
+      49% 70%,
+      73% 60%,
+      100% 50%,
+      100% 100%,
+      68% 100%,
+      32% 100%,
+      0 100%,
+      0% 50%,
+      28% 60%
+    );
+    z-index: -1;
+  }
+  .slide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #b1c9ef;
+  }
+
+  .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffcf81;
+  }
+
+  .darkMode .ant-drawer-header {
+    background-color: #001529;
+    
+  }
+
+  .ant-select-selector span .ant-select-selection-placeholder {
+    color: #ccc;
+  }
+
+  .darkMode .ant-drawer-body {
+    background-color: #081C24;
+  }
+  .darkMode .ant-drawer-header-title button {
+    color: white;
+  }
+  .darkMode .ant-form-item-required {
+    color: #ccc;
+  }
+  .darkMode .ant-upload-drag-icon {
+    color: #1890ff;
+  }
+  .darkMode .ant-upload:hover {
+    border-color: #1890ff;
+  }
+
+  .darkMode .ant-select-selection-item,
+  .darkMode .ant-select-in-form-item {
+    color: #ccc;
+  }
+
+  .darkMode .ant-input,
+  .darkMode .ant-input:focus,
+  .darkMode .ant-input-affix-wrapper {
+    background-color: #081C24;
+    color: #ccc;
+  }
+ 
+  .darkMode .ant-input-suffix svg,
+  .darkReset .ant-input-suffix svg  {
+    color: #ccc;
+  }
+
+  .dark  .ant-upload-list-item-name {
+    color: #ccc !important;
+  }
+
+  .ant-pagination.dark .ant-pagination-item-link svg {
+    color: #ccc;
+  }
+
+ .dark .ant-select-dropdown{
+    background: #081C24;
+    color: #ccc;
+  }
+
+  .dark .ant-select-dropdown .ant-select-item-option {
+    color: #ccc;
+  }
+  .dark .ant-select-item.ant-select-item-option.ant-select-item-option-active {
+    background: #74b9f9;
+  }
+
+  .dark .ant-select-item.ant-select-item-option.ant-select-item-option-selected {
+    background: #1890ff;
+  }
+
+  .ant-select-selection-search-input {
+    color: #ccc;
+  }
+
+  .message-animation {
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+}
