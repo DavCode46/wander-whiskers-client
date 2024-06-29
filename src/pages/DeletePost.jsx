@@ -32,7 +32,7 @@ const DeletePost = ({ postID: id }) => {
         );
         setPost(res.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchPost();
@@ -40,7 +40,7 @@ const DeletePost = ({ postID: id }) => {
 
   const deletePost = async () => {
     if (!post) {
-      console.log("El post aún no se ha cargado completamente.");
+      // console.log("El post aún no se ha cargado completamente.");
       return;
     }
 
@@ -71,7 +71,7 @@ const DeletePost = ({ postID: id }) => {
       }
       setLoading(false);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setError(err.response?.data?.message || "Error al eliminar la publicación");
       errorMessage();
     }

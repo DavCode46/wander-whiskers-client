@@ -34,7 +34,7 @@ const DeleteUser = ({ userID: id, text, float }) => {
 
       fetchUserImage()
     } catch(err) {
-      console.log(err)
+      // console.log(err)
     }
   })
   const deleteUser = async () => {

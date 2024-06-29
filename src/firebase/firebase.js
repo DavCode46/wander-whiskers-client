@@ -35,6 +35,6 @@ export const deleteFile = async (url) => {
     const storageRef = ref(storage, url);
     await deleteObject(storageRef);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };
