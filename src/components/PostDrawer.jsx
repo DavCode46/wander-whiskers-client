@@ -108,7 +108,6 @@ const PostDrawer = ({ isEditing, postId, homeButton }) => {
     post.set("condition", condition);
     if (image) {
       try {
-        console.log(image)
         const imageUrl = await uploadFile("posts", image.originFileObj);
         post.set("image", imageUrl);
       } catch (err) {
